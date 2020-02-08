@@ -34,26 +34,28 @@ var getRandomElement = function (array) {
 };
 
 var makeAd = function name(i) {
-  var ad = {
-    'autor': {},
-    'offer': {},
-    'location': {}
+  return {
+    'autor': {
+      'avatar': 'img/avatars/user' + AD_AUTHOR_AVATARS[i] + '.png'
+    },
+    'offer': {
+      'title': AD_OFFER_TITLES[i],
+      'address': AD_OFFER_ADDRESSES[i],
+      'price': getRandomValue(MIN_OFFER_PRICE, MAX_OFFER_PRICE),
+      'type': getRandomElement(AD_OFFER_TYPES),
+      'rooms': getRandomValue(MIN_OFFER_ROOMS, MAX_OFFER_ROOMS),
+      'guests': getRandomValue(MIN_OFFER_GUESTS, MAX_OFFER_GUESTS),
+      'checkin': getRandomElement(AD_OFFER_TIMES),
+      'checkout': getRandomElement(AD_OFFER_TIMES),
+      'features': getRandomElement(AD_OFFER_FEATURES),
+      'description': AD_OFFER_DESCRIPTION,
+      'photos': getRandomElement(AD_OFFER_PHOTOS)
+    },
+    'location': {
+      'x': getRandomValue(MIN_LOCATION_X, map.clientWidth),
+      'y': getRandomValue(MIN_LOCATION_Y, MAX_LOCATION_Y)
+    }
   };
-  ad.autor.avatar = 'img/avatars/user' + AD_AUTHOR_AVATARS[i] + '.png';
-  ad.offer.title = AD_OFFER_TITLES[i];
-  ad.offer.address = AD_OFFER_ADDRESSES[i];
-  ad.offer.price = getRandomValue(MIN_OFFER_PRICE, MAX_OFFER_PRICE);
-  ad.offer.type = getRandomElement(AD_OFFER_TYPES);
-  ad.offer.rooms = getRandomValue(MIN_OFFER_ROOMS, MAX_OFFER_ROOMS);
-  ad.offer.guests = getRandomValue(MIN_OFFER_GUESTS, MAX_OFFER_GUESTS);
-  ad.offer.checkin = getRandomElement(AD_OFFER_TIMES);
-  ad.offer.checkout = getRandomElement(AD_OFFER_TIMES);
-  ad.offer.features = getRandomElement(AD_OFFER_FEATURES);
-  ad.offer.description = AD_OFFER_DESCRIPTION;
-  ad.offer.photos = getRandomElement(AD_OFFER_PHOTOS);
-  ad.location.x = getRandomValue(MIN_LOCATION_X, map.clientWidth);
-  ad.location.y = getRandomValue(MIN_LOCATION_Y, MAX_LOCATION_Y);
-  return ad;
 };
 
 var getAds = function () {
@@ -64,7 +66,7 @@ var getAds = function () {
   return array;
 };
 
-var renderPin = function (pin) {
+var createPin = function (pin) {
   var pinElement = pinTemplate.cloneNode(true);
   pinElement.style.left = pin.location.x - PIN_WIDTH / 2 + 'px';
   pinElement.style.top = pin.location.y - PIN_HEIGHT + 'px';
@@ -74,14 +76,14 @@ var renderPin = function (pin) {
   return pinElement;
 };
 
-var renderRins = function (arrayPins) {
+var renderPins = function (arrayPins) {
   var fragment = document.createDocumentFragment();
   for (var i = 0; i < 8; i++) {
-    fragment.appendChild(renderPin(arrayPins[i]));
+    fragment.appendChild(createPin(arrayPins[i]));
   }
   return fragment;
 };
 
 ads = getAds();
-pinList.appendChild(renderRins(ads));
+pinList.appendChild(renderPins(ads));
 map.classList.remove('map--faded');
