@@ -89,7 +89,6 @@ var renderPins = function (arrayPins) {
 };
 
 ads = getAds();
-pinList.appendChild(renderPins(ads));
 
 var disableInput = function (form) {
   var inputList = form.querySelectorAll('input');
@@ -122,7 +121,9 @@ disableInput(document.querySelector('.ad-form'));
 
 var activationPage = function () {
   document.querySelector('.ad-form').classList.remove('ad-form--disabled');
+  document.querySelector('#address').setAttribute('readonly', 'readonly');
   map.classList.remove('map--faded');
+  pinList.appendChild(renderPins(ads));
   enableInput(document.querySelector('.map__filters'));
   enableInput(document.querySelector('.ad-form'));
   setInputAdress();
@@ -163,16 +164,16 @@ setInputAdress();
 var fieldNumberRoom = document.querySelector('#room_number');
 var fieldNumberGuests = document.querySelector('#capacity');
 
-var validationFieldNumberGuests = function (evt) {
-  var NumberRoom = fieldNumberRoom.value;
-  var NumberGuests = evt.target.value;
-  if (NumberRoom === '1' && (!(NumberGuests === '1'))) {
+var validationFieldNumberGuests = function () {
+  var numberRoom = fieldNumberRoom.value;
+  var numberGuests = fieldNumberGuests.value;
+  if (numberRoom === '1' && (!(numberGuests === '1'))) {
     fieldNumberGuests.setCustomValidity('В одной комнате можно поселить только одного гостя');
-  } else if (NumberRoom === '2' && (!((NumberGuests === '1') || (NumberGuests === '2')))) {
+  } else if (numberRoom === '2' && (!((numberGuests === '1') || (numberGuests === '2')))) {
     fieldNumberGuests.setCustomValidity('В двух комнатах можно поселить 1 или 2 гостей');
-  } else if (NumberRoom === '3' && (!((NumberGuests === '1') || (NumberGuests === '2') || (NumberGuests === '3')))) {
+  } else if (numberRoom === '3' && (!((numberGuests === '1') || (numberGuests === '2') || (numberGuests === '3')))) {
     fieldNumberGuests.setCustomValidity('В трёх комнатах можно поселить 1, 2 или 3 гостей');
-  } else if (NumberRoom === '100' && !(NumberGuests === '0')) {
+  } else if (numberRoom === '100' && !(numberGuests === '0')) {
     fieldNumberGuests.setCustomValidity('В 100 комнатах можно заблудиться');
   } else {
     fieldNumberGuests.setCustomValidity('');
@@ -180,4 +181,6 @@ var validationFieldNumberGuests = function (evt) {
 };
 
 var buttonFormSubmit = document.querySelector('.ad-form__submit');
-buttonFormSubmit.addEventListener('click', validationFieldNumberGuests);
+buttonFormSubmit.addEventListener('click', function () {
+  validationFieldNumberGuests();
+});
