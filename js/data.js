@@ -54,13 +54,15 @@
     };
   };
 
-  window.data = {
-    getAds: function () {
-      var array = [];
-      for (var i = 0; i < 8; i++) {
-        array[i] = makeAd(i);
-      }
-      return array;
+  var getAds = function () {
+    var array = [];
+    for (var i = 0; i < 8; i++) {
+      array[i] = makeAd(i);
     }
+    return array;
+  };
+
+  window.data = {
+    'getAds': getAds
   };
 })();

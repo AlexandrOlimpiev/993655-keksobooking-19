@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+
   var setStateInput = function (form, state) {
     var inputList = form.querySelectorAll('input');
     var selectList = form.querySelectorAll('select');
@@ -24,6 +25,12 @@
   };
 
   window.util = {
-    'setStateInput': setStateInput
+    'setStateInput': setStateInput,
+    'MAIN_PIN_WIDTH': 62,
+    'MAIN_PIN_HEIGHT': 62,
+    'MAIN_PIN_FOOT_HEIGHT': 22,
+    'PIN_WIDTH': 50,
+    'PIN_HEIGHT': 70,
+    'ENTER_KEY': 'Enter'
   };
 })();

@@ -1,6 +1,9 @@
 'use strict';
 
 (function () {
+  var fieldNumberRoom = document.querySelector('#room_number');
+  var fieldNumberGuests = document.querySelector('#capacity');
+
   var setInputAdress = function () {
     document.querySelector('#address').value = window.pin.getMainPinLocationX() + ', ' + window.pin.getMainPinLocationY();
   };
@@ -11,12 +14,6 @@
     window.util.setStateInput(document.querySelector('.ad-form', 'enable'));
     setInputAdress();
   };
-
-  document.querySelector('.map__pin--main').addEventListener('mouseup', setInputAdress);
-  window.util.setStateInput(document.querySelector('.ad-form', 'disable'));
-
-  var fieldNumberRoom = document.querySelector('#room_number');
-  var fieldNumberGuests = document.querySelector('#capacity');
 
   var validationFieldNumberGuests = function () {
     var numberRoom = fieldNumberRoom.value;
@@ -38,6 +35,10 @@
   buttonFormSubmit.addEventListener('click', function () {
     validationFieldNumberGuests();
   });
+
+  setInputAdress();
+  document.querySelector('.map__pin--main').addEventListener('mouseup', setInputAdress);
+  window.util.setStateInput(document.querySelector('.ad-form', 'disable'));
 
   window.form = {
     'activationForm': activationForm
