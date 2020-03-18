@@ -14,7 +14,7 @@
         inputList[i].removeAttribute('disabled');
       }
     }
-    for (var j = 0; j < inputList.length; j++) {
+    for (var j = 0; j < selectList.length; j++) {
       if (state === 'disable') {
         selectList[j].setAttribute('disabled', 'disabled');
       }

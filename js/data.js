@@ -8,12 +8,12 @@
   var MAX_OFFER_PRICE = 2000;
   var AD_OFFER_TYPES = ['palace', 'flat', 'house', 'bungalo'];
   var MIN_OFFER_ROOMS = 1;
-  var MAX_OFFER_ROOMS = 5;
+  var MAX_OFFER_ROOMS = 4;
   var MIN_OFFER_GUESTS = 1;
   var MAX_OFFER_GUESTS = 6;
   var AD_OFFER_TIMES = ['12:00', '13:00', '14:00'];
   var AD_OFFER_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
-  var AD_OFFER_DESCRIPTION = 'Описание жилья';
+  var AD_OFFER_DESCRIPTION = 'як у лучших домах Парыжу и лондону';
   var AD_OFFER_PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
   var MIN_LOCATION_X = 0;
   var MIN_LOCATION_Y = 130;
@@ -27,6 +27,14 @@
   var getRandomElement = function (array) {
     var i = getRandomValue(0, array.length - 1);
     return array[i];
+  };
+
+  var getRandomArray = function (testArray) {
+    var outArray = [];
+    for (var j = 0; j <= getRandomValue(0, testArray.length - 1); j++) {
+      outArray[j] = getRandomElement(testArray);
+    }
+    return outArray;
   };
 
   var makeAd = function name(i) {
@@ -43,9 +51,9 @@
         'guests': getRandomValue(MIN_OFFER_GUESTS, MAX_OFFER_GUESTS),
         'checkin': getRandomElement(AD_OFFER_TIMES),
         'checkout': getRandomElement(AD_OFFER_TIMES),
-        'features': getRandomElement(AD_OFFER_FEATURES),
+        'features': getRandomArray(AD_OFFER_FEATURES),
         'description': AD_OFFER_DESCRIPTION,
-        'photos': getRandomElement(AD_OFFER_PHOTOS)
+        'photos': getRandomArray(AD_OFFER_PHOTOS)
       },
       'location': {
         'x': getRandomValue(MIN_LOCATION_X, map.clientWidth),
@@ -55,11 +63,11 @@
   };
 
   var getAds = function () {
-    var array = [];
+    var arrayObjects = [];
     for (var i = 0; i < 8; i++) {
-      array[i] = makeAd(i);
+      arrayObjects[i] = makeAd(i);
     }
-    return array;
+    return arrayObjects;
   };
 
   window.data = {

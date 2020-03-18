@@ -11,7 +11,7 @@
   var activationForm = function () {
     document.querySelector('.ad-form').classList.remove('ad-form--disabled');
     document.querySelector('#address').setAttribute('readonly', 'readonly');
-    window.util.setStateInput(document.querySelector('.ad-form', 'enable'));
+    window.util.setStateInput(document.querySelector('.ad-form'), 'enable');
     setInputAdress();
   };
 
@@ -38,7 +38,7 @@
 
   setInputAdress();
   document.querySelector('.map__pin--main').addEventListener('mouseup', setInputAdress);
-  window.util.setStateInput(document.querySelector('.ad-form', 'disable'));
+  window.util.setStateInput(document.querySelector('.ad-form'), 'disable');
 
   window.form = {
     'activationForm': activationForm
